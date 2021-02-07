@@ -10,16 +10,12 @@ public class Wander : SteeringBehavior
 
     protected virtual Vector3 getTargetPosition()
     {
-        return new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+        return new Vector3(character.transform.position.x + Random.Range(-5, 5), 0, character.transform.position.y + Random.Range(-5, 5));
     }
     public override SteeringOutput getSteering()
     {
         SteeringOutput result = new SteeringOutput();
         Vector3 targetPosition = getTargetPosition();
-        if (targetPosition == Vector3.positiveInfinity)
-        {
-            return null;
-        }
 
         result.linear = targetPosition - character.transform.position;
 

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pursue : Seek
+public class Evade : Flee
 {
     float maxTimeToPredict = 5f;
 
     protected override Vector3 getTargetPosition()
     {
-        float targetDistance = (target.transform.position - character.transform.position).magnitude;
+        float targetDistance = (character.transform.position - target.transform.position).magnitude;
         float currSpeed = character.linearVelocity.magnitude;
 
         float currPredictionTime;
@@ -20,9 +20,9 @@ public class Pursue : Seek
 
         Kinematic movingTarget = target.GetComponent<Kinematic>();
 
-        if(movingTarget == null)
+        if (movingTarget == null)
             return base.getTargetPosition();
 
-        return target.transform.position + (movingTarget.linearVelocity * currPredictionTime);
+        return (movingTarget.linearVelocity * currPredictionTime) - target.transform.position;
     }
 }
